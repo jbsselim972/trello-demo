@@ -1,14 +1,13 @@
 "use client";
 
-import Link from "next/link";
-import { Plus } from "lucide-react";
-import { useLocalStorage } from "usehooks-ts";
 import { useOrganization, useOrganizationList } from "@clerk/nextjs";
+import { Plus } from "lucide-react";
+import Link from "next/link";
+import { useLocalStorage } from "usehooks-ts";
 
-import { Button } from "@/components/ui/button";
-import { Separator } from "@/components/ui/separator";
-import { Skeleton } from "@/components/ui/skeleton";
 import { Accordion } from "@/components/ui/accordion";
+import { Button } from "@/components/ui/button";
+import { Skeleton } from "@/components/ui/skeleton";
 import { NavItem, Organization } from "./nav-item";
 
 interface SidebarProps {
@@ -26,6 +25,10 @@ const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     userMemberships: { infinite: true },
   });
 
+  console.log("isLoadedOrg", isLoadedOrg);
+  console.log("isLoadedOrgList", isLoadedOrgList);
+  console.log("userMemberships", userMemberships);
+
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
       if (expanded[key]) {
@@ -40,7 +43,7 @@ const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     setExpanded((curr) => ({ ...curr, [id]: !expanded[id] }));
   };
 
-  if (!isLoadedOrg || !isLoadedOrgList || userMemberships.isLoading) {
+  if (!isLoadedOrg || !isLoadedOrgList) {
     return (
       <>
         <div className="flex items-center justify-between mb-2">
