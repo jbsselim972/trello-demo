@@ -1,6 +1,6 @@
-import Stripe from "stripe";
 import { headers } from "next/headers";
 import { NextResponse } from "next/server";
+import Stripe from "stripe";
 
 import { db } from "@/lib/db";
 import { stripe } from "@/lib/stripe";
@@ -29,6 +29,8 @@ export async function POST(req: Request) {
     );
 
     if (!session?.metadata?.orgId) {
+      console.error(JSON.stringify(session?.metadata, null, 2));
+
       return new NextResponse("Org ID is required", { status: 400 });
     }
 
