@@ -25,10 +25,6 @@ const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
     userMemberships: { infinite: true },
   });
 
-  console.log("isLoadedOrg", isLoadedOrg);
-  console.log("isLoadedOrgList", isLoadedOrgList);
-  console.log("userMemberships", userMemberships);
-
   const defaultAccordionValue: string[] = Object.keys(expanded).reduce(
     (acc: string[], key: string) => {
       if (expanded[key]) {
@@ -58,6 +54,7 @@ const Sidebar = ({ storageKey = "t-sidebar-state" }: SidebarProps) => {
       </>
     );
   }
+
   return (
     <>
       <div className="font-medium text-xs flex items-center mb-1">
